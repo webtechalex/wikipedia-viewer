@@ -1,7 +1,10 @@
 import {expect} from 'chai';
 import request from 'request';
+import deepFreeze from 'deep-freeze';
 
-import fetchData from './../index.js';
+import submitSearch from './../reducers';
+console.log(submitSearch);
+import fetchData from './../helpers/fetchData.js';
 
 describe('first test', function() {
   it('should run a test', function() {
@@ -40,9 +43,41 @@ ${query}&prop=info&inprop=url&format=json&callback=?`
       },
       function(error, response, body) {
         expect(response.statusCode).to.equal(200);
-        console.log(JSON.parse(response.body.slice(5, -1)).query.pages);
+        expect(JSON.parse(response.body.slice(5, -1)).query.pages).to.be.an('object');
         done();
       }
     );
+  });
+});
+
+describe('Search request', function() {
+  it('should modify the query and isLoading states after calling submit query action', function(done) {
+    const initialState = {
+      query: '',
+      isValid: true,
+      isLoading: false,
+      hasErrored: false,
+      result: {}
+    };
+
+    const action = {
+      type: 'SUBMIT_SEARCH',
+      query: 'searching',
+      isLoading: true
+    };
+
+    deepFreeze(initialState);
+    deepFreeze(action);
+
+    const newState = {
+      query: 'searching',
+      isValid: true,
+      isLoading: true,
+      hasErrored: false,
+      result: {}
+    }
+
+    expect(submitSearch(initialState, action)).to.deep.equal(newState);
+    done();
   });
 });
