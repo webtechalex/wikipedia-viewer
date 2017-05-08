@@ -3,6 +3,7 @@ import request from 'request';
 import deepFreeze from 'deep-freeze';
 
 import searchApp from './../reducers';
+import storeSearchQuery from './../reducers/storeSearchQuery'
 import searchHasErrored from './../reducers/searchHasErrored';
 import searchIsLoading from './../reducers/searchIsLoading';
 import searchFetchDataSuccess from './../reducers/searchFetchDataSuccess';
@@ -56,6 +57,8 @@ ${query}&prop=info&inprop=url&format=json&callback=?`
 describe('Test for searchIsLoading action', function() {
   it('should replace searchIsLoading state with passed boolean', function(done) {
     const initialState = {
+      storeSearchQuery: '',
+      searchQueryIsValid: true,
       searchIsLoading: false,
       searchHasErrored: false,
       searchFetchDataSuccess: {}
@@ -70,6 +73,8 @@ describe('Test for searchIsLoading action', function() {
     deepFreeze(action);
 
     const newState = {
+      storeSearchQuery: '',
+      searchQueryIsValid: true,
       searchIsLoading: true,
       searchHasErrored: false,
       searchFetchDataSuccess: {}
@@ -83,6 +88,8 @@ describe('Test for searchIsLoading action', function() {
 describe('Test for searchHasErrored action', function() {
   it('should replace searchHasErrored state with passed boolean', function(done) {
     const initialState = {
+      storeSearchQuery: '',
+      searchQueryIsValid: true,
       searchIsLoading: false,
       searchHasErrored: false,
       searchFetchDataSuccess: {}
@@ -97,6 +104,8 @@ describe('Test for searchHasErrored action', function() {
     deepFreeze(action);
 
     const newState = {
+      storeSearchQuery: '',
+      searchQueryIsValid: true,
       searchIsLoading: false,
       searchHasErrored: true,
       searchFetchDataSuccess: {}
@@ -110,6 +119,8 @@ describe('Test for searchHasErrored action', function() {
 describe('Test for searchFetchDataSuccess action', function() {
   it('should replace searchFetchDataSuccess state with passed object', function(done) {
     const initialState = {
+      storeSearchQuery: '',
+      searchQueryIsValid: true,
       searchIsLoading: false,
       searchHasErrored: false,
       searchFetchDataSuccess: {}
@@ -129,6 +140,8 @@ describe('Test for searchFetchDataSuccess action', function() {
     deepFreeze(action);
 
     const newState = {
+      storeSearchQuery: '',
+      searchQueryIsValid: true,
       searchIsLoading: false,
       searchHasErrored: false,
       searchFetchDataSuccess: {
@@ -144,9 +157,69 @@ describe('Test for searchFetchDataSuccess action', function() {
   });
 });
 
+describe('Test for storeSearchQuery action', function() {
+  it('should replace searchQuery state with passed string', function(done) {
+    const initialState = {
+      storeSearchQuery: '',
+      searchQueryIsValid: true,
+      searchIsLoading: false,
+      searchHasErrored: false,
+      searchFetchDataSuccess: {}
+    };
+
+    const storeSearchQuery = 'foo';
+
+    const action = {
+      type: 'STORE_SEARCH_QUERY',
+      storeSearchQuery
+    }
+
+    const newState = {
+      storeSearchQuery,
+      searchQueryIsValid: true,
+      searchIsLoading: false,
+      searchHasErrored: false,
+      searchFetchDataSuccess: {}
+    }
+
+    expect(searchApp(initialState, action)).to.deep.equal(newState);
+    done();
+  });
+});
+
+describe('Test for searchQueryIsValid action', function() {
+  it('should replace searchQueryIsValid state with passed boolean', function(done) {
+    const initialState = {
+      storeSearchQuery: '',
+      searchQueryIsValid: true,
+      searchIsLoading: false,
+      searchHasErrored: false,
+      searchFetchDataSuccess: {}
+    };
+
+    const action = {
+      type: 'SEARCH_QUERY_IS_VALID',
+      searchQueryIsValid: false
+    }
+
+    const newState = {
+      storeSearchQuery: '',
+      searchQueryIsValid: false,
+      searchIsLoading: false,
+      searchHasErrored: false,
+      searchFetchDataSuccess: {}
+    }
+
+    expect(searchApp(initialState, action)).to.deep.equal(newState);
+    done();
+  });
+});
+
 describe('Test for unknown action', function() {
   it('should return the initial state', function(done) {
     const initialState = {
+      storeSearchQuery: '',
+      searchQueryIsValid: true,
       searchIsLoading: false,
       searchHasErrored: false,
       searchFetchDataSuccess: {}
@@ -170,6 +243,8 @@ describe('Test for unknown action', function() {
 describe('Test for no params', function() {
   it('should return the default state', function(done) {
     const defaultState = {
+      storeSearchQuery: '',
+      searchQueryIsValid: true,
       searchIsLoading: false,
       searchHasErrored: false,
       searchFetchDataSuccess: {}
