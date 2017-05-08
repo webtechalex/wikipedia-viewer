@@ -1,14 +1,13 @@
-const submitSearch = (state, action) => {
-  if (action.type === 'SUBMIT_SEARCH') {
-    return Object.assign(
-      {},
-      state,
-      {
-        query: action.query,
-        isLoading: action.isLoading
-      }
-    );
-  }
-}
+import {combineReducers} from 'redux';
 
-export default submitSearch;
+import searchHasErrored from './searchHasErrored';
+import searchIsLoading from './searchIsLoading';
+import searchFetchDataSuccess from './searchFetchDataSuccess';
+
+const searchApp = combineReducers({
+  searchHasErrored,
+  searchIsLoading,
+  searchFetchDataSuccess
+});
+
+export default searchApp;

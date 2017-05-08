@@ -1,7 +1,20 @@
-export const submitSearch = (query) => {
+export const searchHasErrored = (bool) => {
   return {
-    type: 'SUBMIT_SEARCH',
-    query,
-    isLoading: true
-  };
+    type: 'SEARCH_HAS_ERRORED',
+    searchHasErrored: bool
+  }
+}
+
+export const searchIsLoading = (bool) => {
+  return {
+    type: 'SEARCH_IS_LOADING',
+    searchIsLoading: bool
+  }
+}
+
+export const searchFetchDataSuccess = (searchResponse) => {
+  return {
+    type: 'SEARCH_FETCH_DATA_SUCCESS',
+    searchResponse
+  }
 }

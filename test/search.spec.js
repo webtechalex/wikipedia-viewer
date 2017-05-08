@@ -2,8 +2,11 @@ import {expect} from 'chai';
 import request from 'request';
 import deepFreeze from 'deep-freeze';
 
-import submitSearch from './../reducers';
-console.log(submitSearch);
+import searchApp from './../reducers';
+import searchHasErrored from './../reducers/searchHasErrored';
+import searchIsLoading from './../reducers/searchIsLoading';
+import searchFetchDataSuccess from './../reducers/searchFetchDataSuccess';
+
 import fetchData from './../helpers/fetchData.js';
 
 describe('first test', function() {
@@ -50,34 +53,131 @@ ${query}&prop=info&inprop=url&format=json&callback=?`
   });
 });
 
-describe('Search request', function() {
-  it('should modify the query and isLoading states after calling submit query action', function(done) {
+describe('Test for searchIsLoading action', function() {
+  it('should replace searchIsLoading state with passed boolean', function(done) {
     const initialState = {
-      query: '',
-      isValid: true,
-      isLoading: false,
-      hasErrored: false,
-      result: {}
+      searchIsLoading: false,
+      searchHasErrored: false,
+      searchFetchDataSuccess: {}
     };
 
     const action = {
-      type: 'SUBMIT_SEARCH',
-      query: 'searching',
-      isLoading: true
+      type: 'SEARCH_IS_LOADING',
+      searchIsLoading: true
     };
 
     deepFreeze(initialState);
     deepFreeze(action);
 
     const newState = {
-      query: 'searching',
-      isValid: true,
-      isLoading: true,
-      hasErrored: false,
-      result: {}
+      searchIsLoading: true,
+      searchHasErrored: false,
+      searchFetchDataSuccess: {}
     }
 
-    expect(submitSearch(initialState, action)).to.deep.equal(newState);
+    expect(searchApp(initialState, action)).to.deep.equal(newState);
+    done();
+  });
+});
+
+describe('Test for searchHasErrored action', function() {
+  it('should replace searchHasErrored state with passed boolean', function(done) {
+    const initialState = {
+      searchIsLoading: false,
+      searchHasErrored: false,
+      searchFetchDataSuccess: {}
+    };
+
+    const action = {
+      type: 'SEARCH_HAS_ERRORED',
+      searchHasErrored: true
+    };
+
+    deepFreeze(initialState);
+    deepFreeze(action);
+
+    const newState = {
+      searchIsLoading: false,
+      searchHasErrored: true,
+      searchFetchDataSuccess: {}
+    }
+
+    expect(searchApp(initialState, action)).to.deep.equal(newState);
+    done();
+  });
+});
+
+describe('Test for searchFetchDataSuccess action', function() {
+  it('should replace searchFetchDataSuccess state with passed object', function(done) {
+    const initialState = {
+      searchIsLoading: false,
+      searchHasErrored: false,
+      searchFetchDataSuccess: {}
+    };
+
+    const action = {
+      type: 'SEARCH_FETCH_DATA_SUCCESS',
+      searchFetchDataSuccess: {
+        fruit: 'oranges',
+        animals: 'cats',
+        places: 'cities',
+        drinks: 'spirits'
+      }
+    };
+
+    deepFreeze(initialState);
+    deepFreeze(action);
+
+    const newState = {
+      searchIsLoading: false,
+      searchHasErrored: false,
+      searchFetchDataSuccess: {
+        fruit: 'oranges',
+        animals: 'cats',
+        places: 'cities',
+        drinks: 'spirits'
+      }
+    }
+
+    expect(searchApp(initialState, action)).to.deep.equal(newState);
+    done();
+  });
+});
+
+describe('Test for unknown action', function() {
+  it('should return the initial state', function(done) {
+    const initialState = {
+      searchIsLoading: false,
+      searchHasErrored: false,
+      searchFetchDataSuccess: {}
+    };
+
+    const action = {
+      type: 'SEARCH_BLAH',
+      blah: {
+        foo: 'bar'
+      }
+    };
+
+    deepFreeze(initialState);
+    deepFreeze(action);
+
+    expect(searchApp(initialState, action)).to.deep.equal(initialState);
+    done();
+  });
+});
+
+describe('Test for no params', function() {
+  it('should return the default state', function(done) {
+    const defaultState = {
+      searchIsLoading: false,
+      searchHasErrored: false,
+      searchFetchDataSuccess: {}
+    };
+
+    deepFreeze(defaultState);
+
+    expect(searchApp()).to.deep.equal(defaultState);
     done();
   });
 });
