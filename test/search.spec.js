@@ -1,6 +1,7 @@
 import {expect} from 'chai';
-import request from 'request';
+import fetch from 'isomorphic-fetch';
 import deepFreeze from 'deep-freeze';
+import {empty} from './mocks/empty.js';
 
 import searchApp from './../reducers';
 import storeSearchQuery from './../reducers/storeSearchQuery'
@@ -8,7 +9,6 @@ import searchHasErrored from './../reducers/searchHasErrored';
 import searchIsLoading from './../reducers/searchIsLoading';
 import searchFetchDataSuccess from './../reducers/searchFetchDataSuccess';
 
-import fetchData from './../helpers/fetchData.js';
 
 describe('first test', function() {
   it('should run a test', function() {
@@ -16,43 +16,10 @@ describe('first test', function() {
   });
 });
 
-describe('module access test', function() {
-  it('should have access to the fetchData function', function() {
-  	expect(fetchData).to.be.a('function');
-  });
-});
-
-// How do I make the fetchData function run in the test and browser environment?
-describe('API access test', function() {
-  it('should return a 200 response when calling the API', function(done) {
-    request.get(
-      {
-        url: 'https://en.wikipedia.org/w/api.php?action=query&titles=Main%20Page&prop=revisions&rvprop=content&format=json'
-      },
-      function(error, response, body) {
-        expect(response.statusCode).to.equal(200);
-        done();
-      }
-    );
-  });
-});
-
-describe('API response test', function() {
-  it('should return an object, given a URL endpoint', function(done) {
-    const query = 'javascript'
-    request.get(
-      {
-        url: `https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=
-${query}&prop=info&inprop=url&format=json&callback=?`
-      },
-      function(error, response, body) {
-        expect(response.statusCode).to.equal(200);
-        expect(JSON.parse(response.body.slice(5, -1)).query.pages).to.be.an('object');
-        done();
-      }
-    );
-  });
-});
+// fetch('https://en.wikipedia.org/w/api.php?action=query&titles=Main%20Page&prop=revisions&rvprop=content&format=json')
+// fetch(`https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=${query}&prop=info&inprop=url&format=json&callback=?`)
+//   .then(response => response.json())
+//     .then(json => dispatch(searchFetchDataSuccess()))
 
 describe('Test for searchIsLoading action', function() {
   it('should replace searchIsLoading state with passed boolean', function(done) {

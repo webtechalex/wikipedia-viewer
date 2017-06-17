@@ -4,7 +4,8 @@ function fetchData(url) {
   request.get(
     {url},
     function(error, response, body) {
-      return JSON.parse(body);
+      // return JSON.parse(body);
+      return response.json();
     }
   );
 }

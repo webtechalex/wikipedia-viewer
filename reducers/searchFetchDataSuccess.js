@@ -3,6 +3,6 @@ const searchFetchDataSuccess = (state = {}, action) => {
     return action.searchFetchDataSuccess;
   }
   return state
-}
+};
 
 export default searchFetchDataSuccess;
