@@ -1,7 +1,13 @@
 import React from 'react';
 
+import Title from './Title';
+
 function App(props) {
-  return <p>Hello Wikipedia!</p>;
+  return (
+    <div>
+      <Title />
+    </div>
+  );
 }
 
 export default App;
