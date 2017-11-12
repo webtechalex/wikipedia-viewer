@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Error(props) {
+function Error() {
   return (
-    <div>
-      <h2>Error!</h2>
+    <div className="centered error">
+      <p>There was an error retrieving this search query. Please try another.</p>
     </div>
   );
 }

@@ -1,17 +1,28 @@
 import React from 'react';
 
+
 function ResultList(props) {
-  // TODO: These prop names will most likely change once data is received and processed
   return (
-    <ul>
-      {props.results.map(result => (
-        <li>
-          <h2>{result.title}</h2>
-          <h3>{result.synopsis}</h3>
-          <a href={result.link}>more...</a>
-        </li>
-      ))}
-    </ul>
+    <div>
+      <div className="clear">
+        <a href="#" onClick={(e) => {
+          e.preventDefault();
+          return props.clearSearchResults();
+        }}>clear search results</a>
+      </div>
+      <ul>
+        {props.results.map(result => {
+          return (
+            <li key={result.pageid} className="search-result">
+              <a href={`https://en.wikipedia.org/?curid=${result.pageid}`} target="_blank">
+                <h2>{result.title}</h2>
+                <p>{result.extract.slice(0, 200)}...</p>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   )
 }
 

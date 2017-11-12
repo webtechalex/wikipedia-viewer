@@ -7,6 +7,7 @@ var HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
 
 module.exports = {
   entry: __dirname + '/app/index.js',
+  devtool: 'eval-source-map',
   module: {
     rules: [
       {
@@ -22,9 +23,15 @@ module.exports = {
         test: /\.scss$/,
         exclude: /node_modules/,
         use: [
-          "style-loader",
-          "css-loader",
-          "sass-loader"
+          {
+            loader: "style-loader"
+          },
+          {
+            loader: "css-loader"
+          },
+          {
+            loader: "sass-loader"
+          }
         ]
       }
     ]

@@ -1,18 +1,22 @@
-import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import Results from './Results';
+import { clearSearchResults } from '../actions';
 
-import Loading from './Loading';
-import Error from './Error';
-import ResultList from './ResultList';
+const mapStateToProps = (state) => ({
+  searchIsLoading: state.searchIsLoading,
+  searchHasErrored: state.searchHasErrored,
+  searchQueryIsValid: state.searchQueryIsValid,
+  searchResponseData: state.searchResponseData
+});
 
-function ResultsContainer(props) {
-  // TODO: Set up conditional rendering of child components
-  return (
-    <div>
-      <Loading />
-      <Error />
-      {/*<ResultList />*/}
-    </div>
-  );
-}
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({clearSearchResults}, dispatch);
+};
+
+const ResultsContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Results);
 
 export default ResultsContainer;

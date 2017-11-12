@@ -1,10 +1,10 @@
 import React from 'react';
 
-function Title(props) {
+function Title() {
   return (
-    <div>
+    <div className="centered title">
       <h1>Wikipedia Viewer</h1>
-      <h2>by Alexander Brown</h2>
+      <p>by Alexander Brown</p>
     </div>
   );
 }

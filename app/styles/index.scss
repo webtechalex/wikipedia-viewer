@@ -1,0 +1,202 @@
+//@import 'fonts';
+//@import 'components';
+
+html {
+  font-family: sans-serif;
+  color: #888;
+}
+
+body {
+  background: #f8f8f8;
+  margin: 0;
+}
+
+h1, h2 {
+  margin: 0;
+  font-weight: 200;
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #888;
+}
+
+.centered {
+  text-align: center;
+}
+
+.title {
+  background: #58a;
+  color: #fff;
+  padding: 20px;
+}
+
+.search-form {
+  width: 300px;
+  margin: 0 auto;
+
+  input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #7ac;
+    border-top: 1px solid #7ac;
+    border-radius: 2px;
+    padding: 5px;
+    margin: 20px 0;
+    font-size: 22px;
+    box-sizing: border-box;
+    color: #7ac;
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  .search-button {
+    border: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 2px;
+    padding: 10px;
+    width: 100%;
+    background: #58a;
+    color: #fff;
+    font-size: 22px;
+    box-sizing: border-box;
+  }
+
+  .search-button:focus {
+    outline: none;
+  }
+
+  .search-button:active {
+    background: #7ac;
+    position: relative;
+    top: 1px;
+    left: 1px
+  }
+}
+
+.error {
+  bockground: #fff;
+  border: 1px solid #d00;
+  width: 300px;
+  margin: 0 auto;
+  padding: 10px 0;
+
+  p {
+    color: #d00;
+  }
+}
+
+.alert {
+  bockground: #fff;
+  border: 1px solid #dd0;
+  width: 300px;
+  margin: 0 auto;
+  padding: 10px 0;
+
+  p {
+    color: #dd0;
+  }
+}
+
+.results-container {
+  padding: 10px 10%;
+}
+
+.clear {
+  text-align: center;
+  a {
+    color: #58a;
+  }
+  a:hover {
+    color: #7ac;
+  }
+}
+
+.search-result {
+  background: #fff;
+  border: 1px solid #eee;
+  margin: 20px 0;
+  padding: 10px;
+
+  h2 {
+    color: #58a;
+  }
+}
+
+@keyframes loader {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.loader {
+  width: 40px;
+  height: 40px;
+  margin: 50px auto;
+}
+
+.square {
+  background: #7ac;
+  width: 10px;
+  height: 10px;
+  position: relative;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+#sq1 {
+  animation: loader 675ms ease-in-out 0s infinite alternate;
+}
+
+#sq2 {
+  animation: loader 675ms ease-in-out 75ms infinite alternate;
+}
+
+#sq3 {
+  animation: loader 675ms ease-in-out 150ms infinite;
+  margin-right: 0;
+}
+
+#sq4 {
+  animation: loader 675ms ease-in-out 225ms infinite;
+}
+
+#sq5 {
+  animation: loader 675ms ease-in-out 300ms infinite;
+}
+
+#sq6 {
+  animation: loader 675ms ease-in-out 375ms infinite;
+  margin-right: 0;
+}
+
+#sq7 {
+  animation: loader 675ms ease-in-out 450ms infinite;
+}
+
+#sq8 {
+  animation: loader 675ms ease-in-out 525ms infinite;
+}
+
+#sq9 {
+  animation: loader 675ms ease-in-out 600ms infinite;
+  margin-right: 0;
+}

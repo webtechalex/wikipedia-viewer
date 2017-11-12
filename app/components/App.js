@@ -1,14 +1,16 @@
 import React from 'react';
 
 import Title from './Title';
-import Search from './Search';
+import SearchContainer from './SearchContainer';
 import ResultsContainer from './ResultsContainer';
 
-function App(props) {
+import '../styles/index.scss';
+
+function App() {
   return (
     <div>
       <Title />
-      <Search />
+      <SearchContainer />
       <ResultsContainer />
     </div>
   );
